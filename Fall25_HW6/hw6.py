@@ -40,8 +40,27 @@ def problem3(searchstring):
     :param searchstring: string
     :return: string
     """
-    pass
+    pattern = r"([A-Z][a-z]*) (Boy|Girl|boy|girl)"
+    p = re.compile(pattern)
 
+    def fix(m):
+        name = m.group(1)
+        word = m.group(2)
+        if word == "Boy":
+            return name + " " + "Man"
+        elif word == "Girl":
+            return name + " " + "Woman"
+        elif word == "boy":
+            return name + " " + "man"
+        else:
+            return name + " " + "woman"
+
+    results = p.sub(fix, searchstring)
+
+    if results == searchstring:
+        return "nomatch"
+    else:
+        return results
 
 if __name__ == '__main__':
 
