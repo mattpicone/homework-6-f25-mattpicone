@@ -23,8 +23,15 @@ def problem2(searchstring):
     :param searchstring: string
     :return: tuple
     """
-    pass
-
+    pattern = r"([A-Z][a-z]+(?: [A-Z][a-z]+)?) wrote ((?:[A-Z0-9][a-z0-9]* ?){1,3}|books)"
+    p = re.compile(pattern)
+    m = p.search(searchstring)
+    if m:
+        author = m.group(1).strip()
+        book = m.group(2).strip()
+        return (author, book)
+    else:
+        return ("noauthor", "noname")
 
 def problem3(searchstring):
     """
